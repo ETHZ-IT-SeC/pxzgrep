@@ -1,0 +1,53 @@
+#!/bin/sh
+
+options=""
+files=""
+parallel=$(egrep -c "^processor\s*: " /proc/cpuinfo)
+verbose=""
+pattern=""
+for p in "$@"; do
+#    echo @="$@"
+#    echo p="$p"
+    if [ "$p" = "--help" ]; then
+	cat <<EOF
+Usage: $0 [-p<n>] [-V] [<xzgrep options>] pattern file [...]
+
+Parameters:
+
+Takes xz compressed files as parameters.
+
+The grep result is saved per file in a file with the same basename
+(e.g. abc.xz becomes abc), but in the _current_ working directory.
+
+Options:
+
+-p: Takes a number as parameter and is passed to xargs as -P (number
+    of parallel processes spawned)
+
+-V: Verbose, passes --verbose to xargs.
+
+All other options are passed to xzgrep, especially -F and -E.
+EOF
+	exit 0
+    elif [ "$p" = "-V" ]; then
+	verbose=--verbose
+    elif [ "$p" = "-p" ]; then
+	shift;
+	parallel="$1"
+    elif printf -- "$p" | egrep -q '^-p[0-9][0-9]*$'; then
+	parallel=$(printf -- "$p" | egrep -o '[0-9]*')
+    elif printf -- "$p" | egrep -q '^-'; then
+	options="$options $p"
+    elif [ -z "$pattern" ]; then
+	pattern="$p"
+    else
+	files="$files $p"
+    fi
+    shift
+done
+
+echo "$files" \
+    | xargs -n1 | sed -e 's/\.xz$//g' \
+    | xargs -n1 -P$parallel $verbose -I'{}' \
+      sh -c "xzgrep $options '$pattern' {}.xz > "'./$(basename {})'
+
