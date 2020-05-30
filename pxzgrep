@@ -22,7 +22,8 @@ The grep result is saved per file in a file with the same basename
 Options:
 
 -p: Takes a number as parameter and is passed to xargs as -P (number
-    of parallel processes spawned)
+    of parallel processes spawned). Defaults to amount of cores
+    present in the running system.
 
 -V: Verbose, passes --verbose to xargs.
 
