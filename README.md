@@ -4,7 +4,9 @@ pxzgrep(1) - a parallel xzgrep wrapper
 SYNOPSIS
 --------
 
-`pxzgrep` [`-p`<n>] [`-V`] [<xzgrep options>] <pattern> <file1> <file2> [<more files>]
+```
+pxzgrep [-p<n>] [-V] [<xzgrep options>] <pattern> <file1> <file2> [<more files>]
+```
 
 
 DESCRIPTION
