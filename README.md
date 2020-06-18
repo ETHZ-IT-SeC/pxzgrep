@@ -49,6 +49,28 @@ OPTIONS
 
 All other options are passed to `xzgrep`, especially `-F` and `-E`.
 
+
+EXAMPLE
+-------
+
+    $ xzcat ../in/foo.xz
+    foo
+    fnordoo
+    bar
+    $ xzcat ../in/bar.xz
+    foo
+    fnordar
+    bar
+    $ pxzgrep fnord ../in/bar.xz ../in/foo.xz
+    $ head foo bar
+    ==> foo <==
+    fnordoo
+    
+    ==> bar <==
+    fnordar
+    $
+
+
 ENVIRONMENT
 -----------
 
