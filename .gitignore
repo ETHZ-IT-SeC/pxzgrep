@@ -1,2 +1,6 @@
 *~
 *.sw?
+
+# man page artefacts
+/pxzgrep.1
+/pxzgrep.1.gz

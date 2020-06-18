@@ -1,5 +1,14 @@
-pxzgrep, a parallel xzgrep wrapper
-==================================
+pxzgrep(1) - a parallel xzgrep wrapper
+======================================
+
+SYNOPSIS
+--------
+
+`pxzgrep` [`-p`<n>] [`-V`] [<xzgrep options>] <pattern> <file1> <file2> [<more files>]
+
+
+DESCRIPTION
+-----------
 
 If you need to grep through terabytes of compressed log files, this
 can take a lot of time if you do it serial — even on fast hardware.
@@ -16,32 +25,17 @@ Citing from the [xzgrep(1) man page](https://linux.die.net/man/1/xzgrep):
 > bzip2(1), or lzop(1).
 
 
-Requirements
-------------
-
-* Bourne shell (typically `/bin/sh`, does not need to be a Bash),
-  `sed`, `xargs`
-
-* `xzgrep` (and hence also `grep` ;-) as usually shipped with `xz`
-  itself.
-
-Usage
+FILES
 -----
-
-### Synopsis
-
-```
-pxzgrep [-p<n>] [-V] [<xzgrep options>] <pattern> <file1> <file2> [<more files>]
-```
-
-### Parameters
 
 Takes xz-compressed files as parameters.
 
 The grep result is saved per file in a file with the same basename
 (e.g. `abc.xz` becomes `abc`), but in the __current__ working directory.
 
-### Options
+
+OPTIONS
+-------
 
 `-p`
 : Takes a number as parameter and is passed to xargs as `-P` (number
@@ -53,28 +47,50 @@ The grep result is saved per file in a file with the same basename
 
 All other options are passed to `xzgrep`, especially `-F` and `-E`.
 
-### Environment
+ENVIRONMENT
+-----------
 
 Citing from the [xzgrep(1) man page](https://linux.die.net/man/1/xzgrep):
 
 > `GREP`
-> : If the GREP environment variable is set, xzgrep uses it instead of
->   grep(1), egrep(1), or fgrep(1).
+> : If the `GREP` environment variable is set, xzgrep uses it instead
+>   of grep(1), egrep(1), or fgrep(1).
 
 (But you can also just use `-E` or `-F`.)
 
 
-Author
+RUN-TIME REQUIREMENTS
+---------------------
+
+* Bourne shell (typically `/bin/sh`, does not need to be a Bash),
+  `sed`, `xargs`
+
+* `xzgrep` (and hence also `grep` ;-) as usually shipped with `xz`
+  itself.
+
+
+BUILD REQUIREMENTS
+------------------
+
+For building the man page, [ronn](https://github.com/apjanke/ronn-ng)
+and `gzip` are needed.
+
+
+AUTHOR
 ------
 
 Axel Beckert <axel@ethz.ch> for the [ETH Zurich IT Security
 Center](http://www.security.ethz.ch/).
 
 
-Copyright and License
----------------------
+COPYRIGHT
+---------
 
 © 2020 Axel Beckert <axel@ethz.ch>, ETH Zurich IT Security Center
+
+
+LICENSE
+-------
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

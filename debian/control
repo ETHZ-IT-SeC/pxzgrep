@@ -2,7 +2,8 @@ Source: pxzgrep
 Section: utils
 Priority: optional
 Maintainer: Axel Beckert <abe@debian.org>
-Build-Depends: debhelper-compat (= 13)
+Build-Depends: debhelper-compat (= 13),
+               ronn
 Standards-Version: 4.5.0
 Homepage: https://github.com/ETHZ-IT-SeC/pxzgrep#readme
 Vcs-Browser: https://github.com/ETHZ-IT-SeC/pxzgrep
