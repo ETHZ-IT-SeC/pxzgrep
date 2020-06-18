@@ -1,0 +1,24 @@
+Source: pxzgrep
+Section: utils
+Priority: optional
+Maintainer: Axel Beckert <abe@debian.org>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.5.0
+Homepage: https://github.com/ETHZ-IT-SeC/pxzgrep#readme
+Vcs-Browser: https://github.com/ETHZ-IT-SeC/pxzgrep
+Vcs-Git: https://github.com/ETHZ-IT-SeC/pxzgrep.git
+Rules-Requires-Root: no
+
+Package: pxzgrep
+Architecture: all
+Depends: ${misc:Depends}
+Enhances: xz-utils
+Description: parallel xzgrep wrapper
+ If you need to grep through terabytes of compressed log files, this
+ can take a lot of time if you do it serial - even on fast hardware.
+ .
+ But since such amounts of logs are usually not stored in a single file
+ and most servers today have multiple cores anyway, you can get a
+ massive speed up if you run multiple xzgrep processes in parallel.
+ .
+ pxzgrep automates this.

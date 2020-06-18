@@ -1,0 +1,5 @@
+pxzgrep (1.0.0-1) UNRELEASED; urgency=low
+
+  * Initial release (Closes: #nnnn)
+
+ -- Axel Beckert <abe@debian.org>  Thu, 18 Jun 2020 04:10:32 +0200
