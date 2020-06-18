@@ -61,7 +61,9 @@ EXAMPLE
     foo
     fnordar
     bar
-    $ pxzgrep fnord ../in/bar.xz ../in/foo.xz
+    $ pxzgrep -V fnord ../in/bar.xz ../in/foo.xz
+    sh -c 'xzgrep  '\''fnord'\'' ../in/bar.xz > ./$(basename ../in/bar)' 
+    sh -c 'xzgrep  '\''fnord'\'' ../in/foo.xz > ./$(basename ../in/foo)' 
     $ head foo bar
     ==> foo <==
     fnordoo
