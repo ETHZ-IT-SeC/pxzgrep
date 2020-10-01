@@ -1,6 +1,6 @@
 # Settings
 VERSION=1.0.0
-DISTFILES=pxzgrep *.md Makefile
+DISTFILES=pxzgrep t/*.t t/source t/target *.md Makefile
 MANPAGE=pxzgrep.1
 
 # Defaults
@@ -27,7 +27,7 @@ clean:
 
 dist: ../pxzgrep-$(VERSION).tar.xz
 ../pxzgrep-$(VERSION).tar.xz: $(DISTFILES)
-	tar cvJf ../pxzgrep-$(VERSION).tar.xz $(DISTFILES)
+	tar cvJf ../pxzgrep-$(VERSION).tar.xz --exclude=t/target/\* $(DISTFILES)
 
 origtarxz: ../pxzgrep_$(VERSION).orig.tar.xz
 ../pxzgrep_$(VERSION).orig.tar.xz: ../pxzgrep-$(VERSION).tar.xz
