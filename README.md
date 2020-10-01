@@ -1,6 +1,8 @@
 pxzgrep(1) - a parallel xzgrep wrapper
 ======================================
 
+[![Build Status](https://travis-ci.org/ETHZ-IT-SeC/pxzgrep.svg?branch=master)](https://travis-ci.org/ETHZ-IT-SeC/pxzgrep)
+
 SYNOPSIS
 --------
 
@@ -50,6 +52,14 @@ OPTIONS
 All other options are passed to `xzgrep`, especially `-F` and `-E`.
 
 
+CAVEATS
+-------
+
+* Since `xzgrep` doesn't support `grep`'s `-r` option for recursively
+  grepping through directories, `pxzgrep` doesn't support the `-r`
+  option either.
+
+
 EXAMPLE
 -------
 
@@ -92,7 +102,7 @@ RUN-TIME REQUIREMENTS
   `sed`, `xargs`
 
 * `xzgrep` (and hence also `grep` ;-) as usually shipped with `xz`
-  itself.
+  itself (package `xz-utils` on Debian and Ubuntu).
 
 
 BUILD REQUIREMENTS
