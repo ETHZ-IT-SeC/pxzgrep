@@ -14,6 +14,8 @@ project adheres to
   work.
 * Use getopts (with "s") to ease parsing commandline options with
   parameters.
+* Properly passthrough exit codes from grep to keep grep's over all
+  exit code style: 0 = match found, 1 = no match found, 2 = error
 
 ## [1.0.0] - 2020-06-18
 

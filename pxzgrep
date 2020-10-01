@@ -63,5 +63,37 @@ files="$@"
 echo "$files" \
     | xargs -n1 | sed -e 's/\.xz$//g' \
     | xargs -n1 -P$parallel $verbose -I'{}' \
-      sh -c "xzgrep $options '$pattern' {}.xz > "'./$(basename {})'
+      sh -c "xzgrep $options '$pattern' {}.xz > "'./$(basename {}); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac'
 
+# xargs exit code handling
+# ------------------------
+#
+# grep exits with 0 if there was a match, with 1 if there was no match
+# and with 2 if there was an error. But we want this logic as over all
+# exit state.
+#
+# xargs exits with the following status:
+# 0   if it succeeds
+# 123 if any invocation of the command exited with status 1-125
+# 124 if the command exited with status 255
+# 125 if the command is killed by a signal
+# 126 if the command cannot be run
+# 127 if the command is not found
+# 1   if some other error occurred.
+#
+# Unfortunately xargs throws 1 and 2 into the same error class, so
+# above we invert grep's exit codes and change 2 to 255 to allow to
+# handle this past xargs and the return grep-ish exit codes again:
+
+case $? in
+    # Everything went fine, all files had matches.
+    123)
+        exit 0;;
+    # Everything went fine, some file had no matches.
+    0)
+        exit 1;;
+    124)
+        exit 2;;
+    *)
+        exit $?;;
+esac

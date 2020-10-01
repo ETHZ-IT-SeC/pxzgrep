@@ -64,13 +64,13 @@ unlink(glob('*.txt'));
 run_ok($pxzgrep, '-V', 'foo', glob('../source/*.txt.xz'));
 is(stdout, '', 'STDOUT empty with multiple files and -V');
 is(stderr, <<'EOT', 'STDERR as expected with multiple files and -V');
-sh -c 'xzgrep  '\''foo'\'' ../source/f0.txt.xz > ./$(basename ../source/f0.txt)' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f1.txt.xz > ./$(basename ../source/f1.txt)' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f2.txt.xz > ./$(basename ../source/f2.txt)' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f3.txt.xz > ./$(basename ../source/f3.txt)' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f4.txt.xz > ./$(basename ../source/f4.txt)' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f5.txt.xz > ./$(basename ../source/f5.txt)' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f6.txt.xz > ./$(basename ../source/f6.txt)' 
+sh -c 'xzgrep  '\''foo'\'' ../source/f0.txt.xz > ./$(basename ../source/f0.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
+sh -c 'xzgrep  '\''foo'\'' ../source/f1.txt.xz > ./$(basename ../source/f1.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
+sh -c 'xzgrep  '\''foo'\'' ../source/f2.txt.xz > ./$(basename ../source/f2.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
+sh -c 'xzgrep  '\''foo'\'' ../source/f3.txt.xz > ./$(basename ../source/f3.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
+sh -c 'xzgrep  '\''foo'\'' ../source/f4.txt.xz > ./$(basename ../source/f4.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
+sh -c 'xzgrep  '\''foo'\'' ../source/f5.txt.xz > ./$(basename ../source/f5.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
+sh -c 'xzgrep  '\''foo'\'' ../source/f6.txt.xz > ./$(basename ../source/f6.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
 EOT
 &check_all_files();
 unlink(glob('*.txt'));
@@ -79,13 +79,13 @@ unlink(glob('*.txt'));
 run_ok($pxzgrep, qw(-V -p2 foo), glob('../source/*.txt.xz'));
 is(stdout, '', 'STDOUT empty with multiple files and -V -p2');
 is(stderr, <<'EOT', 'STDERR as expected with multiple files and -V and -p2');
-sh -c 'xzgrep  '\''foo'\'' ../source/f0.txt.xz > ./$(basename ../source/f0.txt)' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f1.txt.xz > ./$(basename ../source/f1.txt)' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f2.txt.xz > ./$(basename ../source/f2.txt)' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f3.txt.xz > ./$(basename ../source/f3.txt)' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f4.txt.xz > ./$(basename ../source/f4.txt)' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f5.txt.xz > ./$(basename ../source/f5.txt)' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f6.txt.xz > ./$(basename ../source/f6.txt)' 
+sh -c 'xzgrep  '\''foo'\'' ../source/f0.txt.xz > ./$(basename ../source/f0.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
+sh -c 'xzgrep  '\''foo'\'' ../source/f1.txt.xz > ./$(basename ../source/f1.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
+sh -c 'xzgrep  '\''foo'\'' ../source/f2.txt.xz > ./$(basename ../source/f2.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
+sh -c 'xzgrep  '\''foo'\'' ../source/f3.txt.xz > ./$(basename ../source/f3.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
+sh -c 'xzgrep  '\''foo'\'' ../source/f4.txt.xz > ./$(basename ../source/f4.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
+sh -c 'xzgrep  '\''foo'\'' ../source/f5.txt.xz > ./$(basename ../source/f5.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
+sh -c 'xzgrep  '\''foo'\'' ../source/f6.txt.xz > ./$(basename ../source/f6.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
 EOT
 &check_all_files();
 unlink(glob('*.txt'));
