@@ -11,7 +11,7 @@ INSTALL:=install -s
 all: man
 test: check
 check:
-	prove t/*.t
+	prove -v t
 
 man: $(MANPAGE)
 $(MANPAGE): README.md Makefile

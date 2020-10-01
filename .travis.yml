@@ -12,6 +12,6 @@ addons:
 before_script:
   - sudo apt-get -y build-dep ./
 script:
-  - prove -v t/*.t
+  - prove -v t
   - dpkg-buildpackage -uc -us -b
   - autopkgtest -B ./ --- null
