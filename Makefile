@@ -8,7 +8,7 @@ DESTDIR:=
 PREFIX:=/usr/local
 INSTALL:=install -s
 
-all: check man
+all: man
 test: check
 check:
 	prove t/*.t
