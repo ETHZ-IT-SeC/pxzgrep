@@ -1,5 +1,8 @@
 pxzgrep (1.0.0+dev-1) UNRELEASED; urgency=medium
 
+  * New upstream release.
+    - Add test suite build-dependencies libtest-command-simple-perl,
+      libtest-file-contents-perl, perl, and xz-utils.
   * Depend on xz-utils, it's just "Standard", not "Essential".
   * Add version constraint to ronn build-dependency: Need a version with
     kramdown as backend.
