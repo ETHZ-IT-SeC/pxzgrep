@@ -18,11 +18,9 @@ if ($ENV{AUTOPKGTEST_TMP}) {
     $pxzgrep = "$Bin/../pxzgrep";
 }
 
-# Option "-h" and "--help" both show the usage
-foreach my $option (qw(-h --help)) {
-    run_ok($pxzgrep, $option);
-    like(stdout, qr/^Usage:/,"Shows usage output with \"$option\".");
-}
+# Option "--help" both show the usage
+run_ok($pxzgrep, '--help');
+like(stdout, qr/^Usage:/,"Shows usage output with \"--help\".");
 
 # Finished
 done_testing();
