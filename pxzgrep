@@ -23,8 +23,13 @@ pattern=""
 while getopts :Vp:-: p; do
 #    echo @="$@"
 #    echo p="$p"
-    if [ "$p" = "--help" ]; then
-	cat <<EOF
+    if [ "$p" = "V" ]; then
+	verbose=--verbose
+    elif [ "$p" = "p" ]; then
+	parallel="$OPTARG"
+    elif [ "$p" = "-" ]; then
+        if [ "$OPTARG" = "help" ]; then
+	    cat <<EOF
 Usage: $0 [-p<n>] [-V] [<xzgrep options>] <pattern> <file1> <file2> [<more files>]
 
 Parameters:
@@ -44,13 +49,10 @@ Options:
 
 All other options are passed to xzgrep, especially -F and -E.
 EOF
-	exit 0
-    elif [ "$p" = "V" ]; then
-	verbose=--verbose
-    elif [ "$p" = "p" ]; then
-	parallel="$OPTARG"
-    elif [ "$p" = "-" ]; then
-	options="$options --$OPTARG"
+	    exit 0
+        else
+	    options="$options --$OPTARG"
+        fi
     elif [ "$p" = "?" ]; then
 	options="$options -$OPTARG"
     fi
