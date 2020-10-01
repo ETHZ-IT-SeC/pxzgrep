@@ -3,7 +3,7 @@ Section: utils
 Priority: optional
 Maintainer: Axel Beckert <abe@debian.org>
 Build-Depends: debhelper-compat (= 13),
-               ronn
+               ronn (>= 0.9.0)
 Standards-Version: 4.5.0
 Homepage: https://github.com/ETHZ-IT-SeC/pxzgrep#readme
 Vcs-Browser: https://github.com/ETHZ-IT-SeC/pxzgrep

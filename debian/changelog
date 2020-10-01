@@ -1,6 +1,8 @@
 pxzgrep (1.0.0+dev-1) UNRELEASED; urgency=medium
 
   * Depend on xz-utils, it's just "Standard", not "Essential".
+  * Add version constraint to ronn build-dependency: Need a version with
+    kramdown as backend.
 
  -- Axel Beckert <abe@debian.org>  Thu, 01 Oct 2020 20:26:28 +0200
 
