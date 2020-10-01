@@ -13,6 +13,7 @@ Homepage: https://github.com/ETHZ-IT-SeC/pxzgrep#readme
 Vcs-Browser: https://github.com/ETHZ-IT-SeC/pxzgrep
 Vcs-Git: https://github.com/ETHZ-IT-SeC/pxzgrep.git
 Rules-Requires-Root: no
+Testsuite: autopkgtest
 
 Package: pxzgrep
 Architecture: all

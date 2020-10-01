@@ -14,3 +14,4 @@ before_script:
 script:
   - prove -v t/*.t
   - dpkg-buildpackage -uc -us -b
+  - autopkgtest -B ./ --- null
