@@ -12,7 +12,8 @@ Rules-Requires-Root: no
 
 Package: pxzgrep
 Architecture: all
-Depends: ${misc:Depends}
+Depends: ${misc:Depends},
+         xz-utils
 Enhances: xz-utils
 Description: parallel xzgrep wrapper
  If you need to grep through terabytes of compressed log files, this
