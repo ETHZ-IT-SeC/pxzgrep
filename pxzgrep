@@ -20,7 +20,7 @@ files=""
 parallel=$(egrep -c "^processor\s*: " /proc/cpuinfo)
 verbose=""
 pattern=""
-for p in "$@"; do
+while getopts :Vp:-: p; do
 #    echo @="$@"
 #    echo p="$p"
     if [ "$p" = "--help" ]; then
@@ -45,22 +45,20 @@ Options:
 All other options are passed to xzgrep, especially -F and -E.
 EOF
 	exit 0
-    elif [ "$p" = "-V" ]; then
+    elif [ "$p" = "V" ]; then
 	verbose=--verbose
-    elif [ "$p" = "-p" ]; then
-	shift;
-	parallel="$1"
-    elif printf -- "$p" | egrep -q '^-p[0-9][0-9]*$'; then
-	parallel=$(printf -- "$p" | egrep -o '[0-9]*')
-    elif printf -- "$p" | egrep -q '^-'; then
-	options="$options $p"
-    elif [ -z "$pattern" ]; then
-	pattern="$p"
-    else
-	files="$files $p"
+    elif [ "$p" = "p" ]; then
+	parallel="$OPTARG"
+    elif [ "$p" = "-" ]; then
+	options="$options --$OPTARG"
+    elif [ "$p" = "?" ]; then
+	options="$options -$OPTARG"
     fi
-    shift
 done
+shift `expr $OPTIND - 1`
+pattern="$1"
+shift
+files="$@"
 
 echo "$files" \
     | xargs -n1 | sed -e 's/\.xz$//g' \

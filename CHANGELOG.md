@@ -10,6 +10,8 @@ project adheres to
 ## [UNRELEASED]
 
 * Add a test suite.
+* Use getopts (with "s") to ease parsing commandline options with
+  parameters.
 
 ## [1.0.0] - 2020-06-18
 
