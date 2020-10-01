@@ -6,14 +6,11 @@ addons:
       - sourceline: deb http://archive.ubuntu.com/ubuntu groovy main
     update: true
     packages:
-      - perl
-      - debhelper
       - autopkgtest
-      - ronn
-      - libtest-command-simple-perl
-      - libtest-file-contents-perl
       - dpkg-dev
       - xz-utils
+before_script:
+  - sudo apt-get -y build-dep ./
 script:
   - prove -v t/*.t
   - dpkg-buildpackage -uc -us -b
