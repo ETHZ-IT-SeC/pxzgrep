@@ -2,6 +2,9 @@ language: shell
 dist: focal
 addons:
   apt:
+    sources:
+      - sourceline: deb http://archive.ubuntu.com/ubuntu groovy main
+    update: true
     packages:
       - perl
       - debhelper
@@ -13,4 +16,4 @@ addons:
       - xz-utils
 script:
   - prove -v t/*.t
-#  - dpkg-buildpackage -uc -us -b
+  - dpkg-buildpackage -uc -us -b
