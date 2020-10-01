@@ -13,4 +13,4 @@ addons:
       - xz-utils
 script:
   - prove -v t/*.t
-  - dpkg-buildpackage -uc -us -b
+#  - dpkg-buildpackage -uc -us -b
