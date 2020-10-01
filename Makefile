@@ -1,6 +1,6 @@
 # Settings
 VERSION=1.0.0
-DISTFILES=pxzgrep call-xzgrep t/*.t t/source t/target *.md Makefile
+DISTFILES=pxzgrep t/*.t t/source t/target *.md Makefile
 MANPAGE=pxzgrep.1
 
 # Defaults
@@ -20,7 +20,6 @@ $(MANPAGE): README.md Makefile
 
 install: all
 	$(INSTALL) -pv pxzgrep $(DESTDIR)$(PREFIX)/bin/
-	$(INSTALL) -pv call-xzgrep $(DESTDIR)$(PREFIX)/share/pxzgrep/
 	$(INSTALL) -pv $(MANPAGE).gz $(DESTDIR)$(PREFIX)/share/man/man1/
 
 clean:

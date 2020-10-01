@@ -49,6 +49,9 @@ OPTIONS
 `-V`
 : Verbose, passes `--verbose` to `xargs`.
 
+`--call-xzgrep`
+: Used internally to run as wrapper around `xzgrep`.
+
 All other options are passed to `xzgrep`, especially `-F` and `-E`.
 
 

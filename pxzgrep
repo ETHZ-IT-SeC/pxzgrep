@@ -16,18 +16,55 @@
 # along with this program.  If not, see https://www.gnu.org/licenses/.
 
 options=""
-parallel=$(egrep -c "^processor\s*: " /proc/cpuinfo)
-verbose=""
-while getopts :Vp:-: p; do
-#    echo @="$@"
-#    echo p="$p"
-    if [ "$p" = "V" ]; then
-	verbose=--verbose
-    elif [ "$p" = "p" ]; then
-	parallel="$OPTARG"
-    elif [ "$p" = "-" ]; then
-        if [ "$OPTARG" = "help" ]; then
-	    cat <<EOF
+
+# Switch between internal wrapper around xzgrep which handles output
+# files and xargs-suitable grep exit codes, and the actual main
+# program.
+
+# Calling xzgrep
+if [ "$1" = '--call-xzgrep' ]; then
+    shift
+
+    while getopts :-: p; do
+        if [ "$p" = "-" ]; then
+	    options="$options --$OPTARG"
+        elif [ "$p" = "?" ]; then
+	    options="$options -$OPTARG"
+        fi
+    done
+    shift `expr $OPTIND - 1`
+    pattern="$1"
+    shift
+    file="$1"
+    shift
+
+    if [ -n "$*" ]; then
+        echo "$0 --call-xzgrep only supports two positional parameters: a search pattern and a single file name" 1>&2
+        exit 2;
+    fi
+
+    xzgrep $options "$pattern" "$file" > ./$(basename "$file" .xz)
+    rc=$?
+    case $rc in
+        0) exit 1   ;;
+        1) exit 0   ;;
+        2) exit 255 ;;
+    esac
+
+else
+
+    parallel=$(egrep -c "^processor\s*: " /proc/cpuinfo)
+    verbose=""
+    while getopts :Vp:-: p; do
+        #echo @="$@"
+        #echo p="$p"
+        if [ "$p" = "V" ]; then
+	    verbose=--verbose
+        elif [ "$p" = "p" ]; then
+	    parallel="$OPTARG"
+        elif [ "$p" = "-" ]; then
+            if [ "$OPTARG" = "help" ]; then
+	        cat <<EOF
 Usage: $0 [-p<n>] [-V] [<xzgrep options>] <pattern> <file1> <file2> [<more files>]
 
 Parameters:
@@ -45,63 +82,57 @@ Options:
 
 -V: Verbose, passes --verbose to xargs.
 
+--call-xzgrep: Used internally to run as wrapper around xzgrep.
+
 All other options are passed to xzgrep, especially -F and -E.
 EOF
-	    exit 0
-        else
-	    options="$options --$OPTARG"
+	        exit 0
+            else
+	        options="$options --$OPTARG"
+            fi
+        elif [ "$p" = "?" ]; then
+	    options="$options -$OPTARG"
         fi
-    elif [ "$p" = "?" ]; then
-	options="$options -$OPTARG"
-    fi
-done
-shift `expr $OPTIND - 1`
-pattern="$1"
-shift
-files="$@"
+    done
+    shift `expr $OPTIND - 1`
+    pattern="$1"
+    shift
+    files="$@"
 
-# Find location of call-xzgrep
-call_xzgrep=$(dirname "$0")/call-xzgrep
-if [ ! -x "$call_xzgrep" -o -n "${AUTOPKGTEST_TMP}" ]; then
-    call_xzgrep=$(dirname "$0")/../share/pxzgrep/call-xzgrep
+    echo "$files" | xargs -n1 -P$parallel $verbose "$0" --call-xzgrep $options "$pattern"
+
+    # xargs exit code handling
+    # ------------------------
+    #
+    # grep exits with 0 if there was a match, with 1 if there was no match
+    # and with 2 if there was an error. But we want this logic as over all
+    # exit state.
+    #
+    # xargs exits with the following status:
+    # 0   if it succeeds
+    # 123 if any invocation of the command exited with status 1-125
+    # 124 if the command exited with status 255
+    # 125 if the command is killed by a signal
+    # 126 if the command cannot be run
+    # 127 if the command is not found
+    # 1   if some other error occurred.
+    #
+    # Unfortunately xargs throws 1 and 2 into the same error class, so
+    # above we invert grep's exit codes and change 2 to 255 to allow to
+    # handle this past xargs and the return grep-ish exit codes again:
+    #
+
+    case $? in
+        # Everything went fine, all files had matches.
+        123)
+            exit 0;;
+        # Everything went fine, some file had no matches.
+        0)
+            exit 1;;
+        124)
+            exit 2;;
+        *)
+            exit $?;;
+    esac
+
 fi
-
-if [ ! -x "$call_xzgrep" ]; then
-    echo "$0: Can't find call-xzgrep. Bailing out." 1>&2
-    exit 2
-fi
-
-echo "$files" | xargs -n1 -P$parallel $verbose "$call_xzgrep" $options "$pattern"
-
-# xargs exit code handling
-# ------------------------
-#
-# grep exits with 0 if there was a match, with 1 if there was no match
-# and with 2 if there was an error. But we want this logic as over all
-# exit state.
-#
-# xargs exits with the following status:
-# 0   if it succeeds
-# 123 if any invocation of the command exited with status 1-125
-# 124 if the command exited with status 255
-# 125 if the command is killed by a signal
-# 126 if the command cannot be run
-# 127 if the command is not found
-# 1   if some other error occurred.
-#
-# Unfortunately xargs throws 1 and 2 into the same error class, so
-# above we invert grep's exit codes and change 2 to 255 to allow to
-# handle this past xargs and the return grep-ish exit codes again:
-
-case $? in
-    # Everything went fine, all files had matches.
-    123)
-        exit 0;;
-    # Everything went fine, some file had no matches.
-    0)
-        exit 1;;
-    124)
-        exit 2;;
-    *)
-        exit $?;;
-esac

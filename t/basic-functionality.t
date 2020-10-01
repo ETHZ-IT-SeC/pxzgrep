@@ -17,11 +17,10 @@ my $call_xzgrep;
 # the installed script.
 if ($ENV{AUTOPKGTEST_TMP}) {
     $pxzgrep = '/usr/bin/pxzgrep';
-    $call_xzgrep = '/usr/bin/../share/pxzgrep/call-xzgrep';
 } else {
     $pxzgrep = "$Bin/../pxzgrep";
-    $call_xzgrep = "$Bin/../call-xzgrep";
 }
+$call_xzgrep = "$pxzgrep --call-xzgrep";
 
 # current working directory needs to be the target directory
 chdir("$Bin/target");
