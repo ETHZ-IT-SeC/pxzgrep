@@ -1,0 +1,14 @@
+language: shell
+dist: focal
+addons:
+  apt:
+    packages:
+      - perl
+      - debhelper
+      - autopkgtest
+      - ronn
+      - libtest-command-simple-perl
+      - dpkg-dev
+script:
+  - prove -v t/*.t
+  - dpkg-buildpackage -uc -us -b
