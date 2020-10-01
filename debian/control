@@ -4,6 +4,7 @@ Priority: optional
 Maintainer: Axel Beckert <abe@debian.org>
 Build-Depends: debhelper-compat (= 13),
                libtest-command-simple-perl <!notest>,
+               libtest-differences-perl <!notest>,
                libtest-file-contents-perl <!notest>,
                perl,
                ronn (>= 0.9.0),
