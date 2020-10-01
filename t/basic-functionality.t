@@ -90,6 +90,30 @@ EOT
 &check_all_files();
 unlink(glob('*.txt'));
 
+# Single file with case insensitivity in different variants
+foreach my $opt (qw(-i --ignore-case)) {
+    run_ok($pxzgrep, $opt, 'foo', '../source/f4.txt.xz');
+    is(stdout, '', 'STDOUT empty with single file');
+    is(stderr, '', 'STDERR empty with single file');
+    file_contents_eq('f4.txt', "foobar4\nFoo4\n");
+    unlink('f4.txt');
+}
+
+# Inverse match
+run_ok($pxzgrep, qw(-v foo ../source/f1.txt.xz ../source/f4.txt.xz));
+is(stdout, '', 'STDOUT empty with single file');
+is(stderr, '', 'STDERR empty with single file');
+file_contents_eq('f1.txt', "bar1\nfnord1\n");
+file_contents_eq('f4.txt', "Foo4\n");
+unlink(glob('f?.txt'));
+
+# Regexp
+run_ok($pxzgrep, qw(-E f.o ../source/f1.txt.xz));
+is(stdout, '', 'STDOUT empty with single file');
+is(stderr, '', 'STDERR empty with single file');
+file_contents_eq('f1.txt', "foo1\nfnord1\nfoo1.1\n1.2foo\n");
+unlink('f1.txt');
+
 # Finished
 done_testing();
 
