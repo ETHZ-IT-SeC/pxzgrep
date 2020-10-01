@@ -60,10 +60,18 @@ pattern="$1"
 shift
 files="$@"
 
-echo "$files" \
-    | xargs -n1 | sed -e 's/\.xz$//g' \
-    | xargs -n1 -P$parallel $verbose -I'{}' \
-      sh -c "xzgrep $options '$pattern' {}.xz > "'./$(basename {}); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac'
+# Find location of call-xzgrep
+call_xzgrep=$(dirname "$0")/call-xzgrep
+if [ ! -x "$call_xzgrep" -o -n "${AUTOPKGTEST_TMP}" ]; then
+    call_xzgrep=$(dirname "$0")/../share/pxzgrep/call-xzgrep
+fi
+
+if [ ! -x "$call_xzgrep" ]; then
+    echo "$0: Can't find call-xzgrep. Bailing out." 1>&2
+    exit 2
+fi
+
+echo "$files" | xargs -n1 -P$parallel $verbose "$call_xzgrep" $options "$pattern"
 
 # xargs exit code handling
 # ------------------------

@@ -8,15 +8,19 @@ use FindBin qw($Bin);
 use Test::More;
 use Test::Command::Simple;
 use Test::File::Contents;
+use Test::Differences;
 
 my $pxzgrep;
+my $call_xzgrep;
 
 # Check if running under Debian and Ubuntu's autopkgtest. If so, test
 # the installed script.
 if ($ENV{AUTOPKGTEST_TMP}) {
     $pxzgrep = '/usr/bin/pxzgrep';
+    $call_xzgrep = '/usr/bin/../share/pxzgrep/call-xzgrep';
 } else {
     $pxzgrep = "$Bin/../pxzgrep";
+    $call_xzgrep = "$Bin/../call-xzgrep";
 }
 
 # current working directory needs to be the target directory
@@ -63,14 +67,14 @@ unlink(glob('*.txt'));
 # Same, but with -V
 run_ok($pxzgrep, '-V', 'foo', glob('../source/*.txt.xz'));
 is(stdout, '', 'STDOUT empty with multiple files and -V');
-is(stderr, <<'EOT', 'STDERR as expected with multiple files and -V');
-sh -c 'xzgrep  '\''foo'\'' ../source/f0.txt.xz > ./$(basename ../source/f0.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f1.txt.xz > ./$(basename ../source/f1.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f2.txt.xz > ./$(basename ../source/f2.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f3.txt.xz > ./$(basename ../source/f3.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f4.txt.xz > ./$(basename ../source/f4.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f5.txt.xz > ./$(basename ../source/f5.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f6.txt.xz > ./$(basename ../source/f6.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
+eq_or_diff(stderr, <<"EOT", 'STDERR as expected with multiple files and -V');
+$call_xzgrep foo ../source/f0.txt.xz 
+$call_xzgrep foo ../source/f1.txt.xz 
+$call_xzgrep foo ../source/f2.txt.xz 
+$call_xzgrep foo ../source/f3.txt.xz 
+$call_xzgrep foo ../source/f4.txt.xz 
+$call_xzgrep foo ../source/f5.txt.xz 
+$call_xzgrep foo ../source/f6.txt.xz 
 EOT
 &check_all_files();
 unlink(glob('*.txt'));
@@ -78,14 +82,14 @@ unlink(glob('*.txt'));
 # Same, but with -V and -p2
 run_ok($pxzgrep, qw(-V -p2 foo), glob('../source/*.txt.xz'));
 is(stdout, '', 'STDOUT empty with multiple files and -V -p2');
-is(stderr, <<'EOT', 'STDERR as expected with multiple files and -V and -p2');
-sh -c 'xzgrep  '\''foo'\'' ../source/f0.txt.xz > ./$(basename ../source/f0.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f1.txt.xz > ./$(basename ../source/f1.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f2.txt.xz > ./$(basename ../source/f2.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f3.txt.xz > ./$(basename ../source/f3.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f4.txt.xz > ./$(basename ../source/f4.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f5.txt.xz > ./$(basename ../source/f5.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
-sh -c 'xzgrep  '\''foo'\'' ../source/f6.txt.xz > ./$(basename ../source/f6.txt); rc=$?; case $rc in 0) exit 1;; 1) exit 0;; 2) exit 255;; esac' 
+eq_or_diff(stderr, <<"EOT", 'STDERR as expected with multiple files and -V and -p2');
+$call_xzgrep foo ../source/f0.txt.xz 
+$call_xzgrep foo ../source/f1.txt.xz 
+$call_xzgrep foo ../source/f2.txt.xz 
+$call_xzgrep foo ../source/f3.txt.xz 
+$call_xzgrep foo ../source/f4.txt.xz 
+$call_xzgrep foo ../source/f5.txt.xz 
+$call_xzgrep foo ../source/f6.txt.xz 
 EOT
 &check_all_files();
 unlink(glob('*.txt'));
