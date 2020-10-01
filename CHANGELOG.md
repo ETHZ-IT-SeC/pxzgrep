@@ -10,6 +10,8 @@ project adheres to
 ## [UNRELEASED]
 
 * Add a test suite.
+* Document why recursively grepping directories with `-r` does not
+  work.
 * Use getopts (with "s") to ease parsing commandline options with
   parameters.
 
