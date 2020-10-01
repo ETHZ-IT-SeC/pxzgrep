@@ -8,7 +8,9 @@ addons:
       - autopkgtest
       - ronn
       - libtest-command-simple-perl
+      - libtest-file-contents-perl
       - dpkg-dev
+      - xz-utils
 script:
   - prove -v t/*.t
   - dpkg-buildpackage -uc -us -b
