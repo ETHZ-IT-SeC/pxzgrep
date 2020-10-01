@@ -7,6 +7,10 @@ The format is based on
 project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [UNRELEASED]
+
+* Add a test suite.
+
 ## [1.0.0] - 2020-06-18
 
 * Initial release.

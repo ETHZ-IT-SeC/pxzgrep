@@ -8,7 +8,11 @@ DESTDIR:=
 PREFIX:=/usr/local
 INSTALL:=install -s
 
-all: man
+all: check man
+test: check
+check:
+	prove t/*.t
+
 man: $(MANPAGE)
 $(MANPAGE): README.md Makefile
 	ronn --roff --manual="pxzgrep Manual" --organization="ETH Zurich IT-SeC" < $< > $@
