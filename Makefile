@@ -6,7 +6,7 @@ MANPAGE=pxzgrep.1
 # Defaults
 DESTDIR:=
 PREFIX:=/usr/local
-INSTALL:=install -s
+INSTALL:=install
 
 all: man
 test: check
