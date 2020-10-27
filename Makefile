@@ -19,7 +19,9 @@ $(MANPAGE): README.md Makefile
 	gzip -9vnf $@
 
 install: all
+	$(INSTALL) -dv $(DESTDIR)$(PREFIX)/bin/
 	$(INSTALL) -pv pxzgrep $(DESTDIR)$(PREFIX)/bin/
+	$(INSTALL) -dv $(DESTDIR)$(PREFIX)/share/man/man1/
 	$(INSTALL) -pv $(MANPAGE).gz $(DESTDIR)$(PREFIX)/share/man/man1/
 
 clean:
