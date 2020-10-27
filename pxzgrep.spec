@@ -1,11 +1,11 @@
 Name:           pxzgrep
-Version:        1.0.0
+Version:        1.0.0+dev
 Release:        0
 Summary:        parallel xzgrep wrapper
 Group:          System
 License:        GPL
 URL:            https://github.com/ETHZ-IT-SeC/pxzgrep
-Source:         https://github.com/ETHZ-IT-SeC/%{name}/archive/%{version}.tar.gz
+Source:         https://github.com/ETHZ-IT-SeC/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Prefix:         %{_prefix}
 Packager: 	Axel Beckert <axel@ethz.ch>
 BuildRoot:      build/%{name}-root

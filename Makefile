@@ -1,5 +1,5 @@
 # Settings
-VERSION=1.0.0
+VERSION=1.0.0+dev
 DISTFILES=pxzgrep t/*.t t/source t/target *.md Makefile
 MANPAGE=pxzgrep.1
 
