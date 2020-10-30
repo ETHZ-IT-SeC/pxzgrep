@@ -3,7 +3,7 @@ dist: focal
 addons:
   apt:
     sources:
-      - sourceline: deb http://archive.ubuntu.com/ubuntu groovy main universe
+      - sourceline: deb http://archive.ubuntu.com/ubuntu devel main universe
     update: true
     packages:
       - autopkgtest
