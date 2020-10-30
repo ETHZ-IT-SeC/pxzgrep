@@ -1,6 +1,7 @@
 # Settings
 PROJECT=pxzgrep
 VERSION=1.0.0+dev
+DISTNAME=$(PROJECT)-$(VERSION)
 DISTFILES=$(PROJECT) t/*.t t/source t/target *.md Makefile
 MANPAGE=$(PROJECT).1
 
@@ -28,21 +29,21 @@ install: all
 clean:
 	rm -f $(MANPAGE)*
 
-dist: ../$(PROJECT)-$(VERSION).tar.xz
-../$(PROJECT)-$(VERSION).tar.xz: $(DISTFILES)
-	mkdir $(PROJECT)-$(VERSION)
-	cp -pvr $(DISTFILES) $(PROJECT)-$(VERSION)
-	tar cvJf $@ --exclude=t/target/\* $(PROJECT)-$(VERSION)
+dist: ../$(DISTNAME).tar.xz
+../$(DISTNAME).tar.xz: $(DISTFILES)
+	mkdir $(DISTNAME)
+	cp -pvr $(DISTFILES) $(DISTNAME)
+	tar cvJf $@ --exclude=t/target/\* $(DISTNAME)
 
 dist-rpm: ~/rpmbuild/SOURCES/$(PROJECT)-1.0.0+dev.tar.gz
-~/rpmbuild/SOURCES/$(PROJECT)-1.0.0+dev.tar.gz: ../$(PROJECT)-$(VERSION).tar.gz
+~/rpmbuild/SOURCES/$(PROJECT)-1.0.0+dev.tar.gz: ../$(DISTNAME).tar.gz
 	cp -pv $< $@
-dist-legacy: ../$(PROJECT)-$(VERSION).tar.gz
-../$(PROJECT)-$(VERSION).tar.gz: $(DISTFILES)
-	mkdir $(PROJECT)-$(VERSION)
-	cp -pvr $(DISTFILES) $(PROJECT)-$(VERSION)
-	tar cvzf $@ --exclude=t/target/\* $(PROJECT)-$(VERSION)
+dist-legacy: ../$(DISTNAME).tar.gz
+../$(DISTNAME).tar.gz: $(DISTFILES)
+	mkdir $(DISTNAME)
+	cp -pvr $(DISTFILES) $(DISTNAME)
+	tar cvzf $@ --exclude=t/target/\* $(DISTNAME)
 
 origtarxz: ../$(PROJECT)_$(VERSION).orig.tar.xz
-../$(PROJECT)_$(VERSION).orig.tar.xz: ../$(PROJECT)-$(VERSION).tar.xz
-	ln -vsf $(PROJECT)-$(VERSION).tar.xz ../$(PROJECT)_$(VERSION).orig.tar.xz
+../$(PROJECT)_$(VERSION).orig.tar.xz: ../$(DISTNAME).tar.xz
+	ln -vsf $(DISTNAME).tar.xz ../$(PROJECT)_$(VERSION).orig.tar.xz
