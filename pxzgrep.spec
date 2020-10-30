@@ -8,6 +8,7 @@ URL:            https://github.com/ETHZ-IT-SeC/pxzgrep
 Source:         https://github.com/ETHZ-IT-SeC/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Prefix:         %{_prefix}
 Packager: 	Axel Beckert <axel@ethz.ch>
+BuildArch:	noarch
 
 %description
 If you need to grep through terabytes of compressed log files, this
