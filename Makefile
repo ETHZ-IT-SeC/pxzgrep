@@ -1,7 +1,8 @@
 # Settings
+PROJECT=pxzgrep
 VERSION=1.0.0+dev
-DISTFILES=pxzgrep t/*.t t/source t/target *.md Makefile
-MANPAGE=pxzgrep.1
+DISTFILES=$(PROJECT) t/*.t t/source t/target *.md Makefile
+MANPAGE=$(PROJECT).1
 
 # Defaults
 DESTDIR:=
@@ -15,26 +16,26 @@ check:
 
 man: $(MANPAGE)
 $(MANPAGE): README.md Makefile
-	ronn --roff --manual="pxzgrep Manual" --organization="ETH Zurich IT-SeC" < $< > $@
+	ronn --roff --manual="$(PROJECT) Manual" --organization="ETH Zurich IT-SeC" < $< > $@
 	gzip -9vnf $@
 
 install: all
 	$(INSTALL) -dv $(DESTDIR)$(PREFIX)/bin/
-	$(INSTALL) -pv pxzgrep $(DESTDIR)$(PREFIX)/bin/
+	$(INSTALL) -pv $(PROJECT) $(DESTDIR)$(PREFIX)/bin/
 	$(INSTALL) -dv $(DESTDIR)$(PREFIX)/share/man/man1/
 	$(INSTALL) -pv $(MANPAGE).gz $(DESTDIR)$(PREFIX)/share/man/man1/
 
 clean:
 	rm -f $(MANPAGE)*
 
-dist: ../pxzgrep-$(VERSION).tar.xz
-../pxzgrep-$(VERSION).tar.xz: $(DISTFILES)
+dist: ../$(PROJECT)-$(VERSION).tar.xz
+../$(PROJECT)-$(VERSION).tar.xz: $(DISTFILES)
 	tar cvJf $@ --exclude=t/target/\* $(DISTFILES)
 
-dist-legacy: ../pxzgrep-$(VERSION).tar.gz
-../pxzgrep-$(VERSION).tar.gz: $(DISTFILES)
-	tar cvzf $@ --exclude=t/target/\* pxzgrep-$(VERSION)
+dist-legacy: ../$(PROJECT)-$(VERSION).tar.gz
+../$(PROJECT)-$(VERSION).tar.gz: $(DISTFILES)
+	tar cvzf $@ --exclude=t/target/\* $(PROJECT)-$(VERSION)
 
-origtarxz: ../pxzgrep_$(VERSION).orig.tar.xz
-../pxzgrep_$(VERSION).orig.tar.xz: ../pxzgrep-$(VERSION).tar.xz
-	ln -vsf pxzgrep-$(VERSION).tar.xz ../pxzgrep_$(VERSION).orig.tar.xz
+origtarxz: ../$(PROJECT)_$(VERSION).orig.tar.xz
+../$(PROJECT)_$(VERSION).orig.tar.xz: ../$(PROJECT)-$(VERSION).tar.xz
+	ln -vsf $(PROJECT)-$(VERSION).tar.xz ../$(PROJECT)_$(VERSION).orig.tar.xz
