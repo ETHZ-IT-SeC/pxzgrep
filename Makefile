@@ -34,6 +34,7 @@ dist: ../$(DISTNAME).tar.xz
 	mkdir $(DISTNAME)
 	cp -pvr $(DISTFILES) $(DISTNAME)
 	tar cvJf $@ --exclude=t/target/\* $(DISTNAME)
+	rm -rv $(DISTNAME)
 
 dist-rpm: ~/rpmbuild/SOURCES/$(PROJECT)-1.0.0+dev.tar.gz
 ~/rpmbuild/SOURCES/$(PROJECT)-1.0.0+dev.tar.gz: ../$(DISTNAME).tar.gz
@@ -43,6 +44,7 @@ dist-legacy: ../$(DISTNAME).tar.gz
 	mkdir $(DISTNAME)
 	cp -pvr $(DISTFILES) $(DISTNAME)
 	tar cvzf $@ --exclude=t/target/\* $(DISTNAME)
+	rm -rv $(DISTNAME)
 
 origtarxz: ../$(PROJECT)_$(VERSION).orig.tar.xz
 ../$(PROJECT)_$(VERSION).orig.tar.xz: ../$(DISTNAME).tar.xz
