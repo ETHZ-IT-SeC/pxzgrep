@@ -29,11 +29,11 @@ clean:
 
 dist: ../pxzgrep-$(VERSION).tar.xz
 ../pxzgrep-$(VERSION).tar.xz: $(DISTFILES)
-	tar cvJf ../pxzgrep-$(VERSION).tar.xz --exclude=t/target/\* $(DISTFILES)
+	tar cvJf $@ --exclude=t/target/\* $(DISTFILES)
 
 dist-legacy: ../pxzgrep-$(VERSION).tar.gz
 ../pxzgrep-$(VERSION).tar.gz: $(DISTFILES)
-	tar cvzf ../pxzgrep-$(VERSION).tar.gz --exclude=t/target/\* $(DISTFILES)
+	tar cvzf $@ --exclude=t/target/\* pxzgrep-$(VERSION)
 
 origtarxz: ../pxzgrep_$(VERSION).orig.tar.xz
 ../pxzgrep_$(VERSION).orig.tar.xz: ../pxzgrep-$(VERSION).tar.xz
