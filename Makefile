@@ -30,10 +30,17 @@ clean:
 
 dist: ../$(PROJECT)-$(VERSION).tar.xz
 ../$(PROJECT)-$(VERSION).tar.xz: $(DISTFILES)
-	tar cvJf $@ --exclude=t/target/\* $(DISTFILES)
+	mkdir $(PROJECT)-$(VERSION)
+	cp -pvr $(DISTFILES) $(PROJECT)-$(VERSION)
+	tar cvJf $@ --exclude=t/target/\* $(PROJECT)-$(VERSION)
 
+dist-rpm: ~/rpmbuild/SOURCES/$(PROJECT)-1.0.0+dev.tar.gz
+~/rpmbuild/SOURCES/$(PROJECT)-1.0.0+dev.tar.gz: ../$(PROJECT)-$(VERSION).tar.gz
+	cp -pv $< $@
 dist-legacy: ../$(PROJECT)-$(VERSION).tar.gz
 ../$(PROJECT)-$(VERSION).tar.gz: $(DISTFILES)
+	mkdir $(PROJECT)-$(VERSION)
+	cp -pvr $(DISTFILES) $(PROJECT)-$(VERSION)
 	tar cvzf $@ --exclude=t/target/\* $(PROJECT)-$(VERSION)
 
 origtarxz: ../$(PROJECT)_$(VERSION).orig.tar.xz
