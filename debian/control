@@ -3,9 +3,9 @@ Section: utils
 Priority: optional
 Maintainer: Axel Beckert <abe@debian.org>
 Build-Depends: debhelper-compat (= 13),
-               libtest-command-simple-perl <!notest>,
-               libtest-differences-perl <!notest>,
-               libtest-file-contents-perl <!notest>,
+               libtest-command-simple-perl <!nocheck>,
+               libtest-differences-perl <!nocheck>,
+               libtest-file-contents-perl <!nocheck>,
                perl,
                ronn (>= 0.9.0),
                xz-utils
