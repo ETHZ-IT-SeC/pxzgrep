@@ -44,12 +44,8 @@ rm -rf build
 %files
 %defattr(-,root,root)
 %doc README.md LICENSE.md CHANGELOG.md TODO.md
-%doc doc/*.html
-%doc doc/*.jpg
-%doc doc/*.css
 %{_bindir}/pxzgrep
 
 %changelog
 * Mon Oct 26 2020 Axel Beckert <axel@ethz.ch>
   - Initial RPM packaging
-  
