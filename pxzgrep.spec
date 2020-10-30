@@ -45,6 +45,7 @@ rm -rf build
 %defattr(-,root,root)
 %doc README.md LICENSE.md CHANGELOG.md TODO.md
 %{_bindir}/pxzgrep
+%{_mandir}/man1/pxzgrep.1.gz
 
 %changelog
 * Mon Oct 26 2020 Axel Beckert <axel@ethz.ch>
