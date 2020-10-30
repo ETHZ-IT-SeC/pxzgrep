@@ -2,7 +2,7 @@
 PROJECT=pxzgrep
 VERSION=1.0.0+dev
 DISTNAME=$(PROJECT)-$(VERSION)
-DISTFILES=$(PROJECT) t *.md Makefile
+DISTFILES=$(PROJECT) t *.md Makefile *.spec
 MANPAGE=$(PROJECT).1
 
 # Defaults
