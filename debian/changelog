@@ -7,6 +7,8 @@ pxzgrep (1.0.0+dev-1) UNRELEASED; urgency=medium
   * Add version constraint to ronn build-dependency: Need a version with
     kramdown as backend.
   * Support autopkgtest.
+  * Ignore some files which are in the git repository for convenience or
+    CI reasons, but not in the generated upstream tar ball.
 
  -- Axel Beckert <abe@debian.org>  Thu, 01 Oct 2020 20:26:28 +0200
 

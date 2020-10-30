@@ -1,0 +1,3 @@
+extend-diff-ignore=\.gitkeep$
+extend-diff-ignore=.*\.spec$
+extend-diff-ignore=\.travis\.yml$
