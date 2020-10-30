@@ -66,14 +66,20 @@ unlink(glob('*.txt'));
 # Same, but with -V
 run_ok($pxzgrep, '-V', 'foo', glob('../source/*.txt.xz'));
 is(stdout, '', 'STDOUT empty with multiple files and -V');
-eq_or_diff(stderr, <<"EOT", 'STDERR as expected with multiple files and -V');
-$call_xzgrep foo ../source/f0.txt.xz 
-$call_xzgrep foo ../source/f1.txt.xz 
-$call_xzgrep foo ../source/f2.txt.xz 
-$call_xzgrep foo ../source/f3.txt.xz 
-$call_xzgrep foo ../source/f4.txt.xz 
-$call_xzgrep foo ../source/f5.txt.xz 
-$call_xzgrep foo ../source/f6.txt.xz 
+# Cope with STDERR output change in xargs since 2019-11-25
+# (i.e. release ≤ 4.7.0), see https://savannah.gnu.org/bugs/?57291
+# (and not https://bugs.gnu.org/?57291 as referred to in the according
+# findutils changelog entry).
+my $stderr = stderr;
+$stderr =~ s/ $//gm;
+eq_or_diff($stderr, <<"EOT", 'STDERR as expected with multiple files and -V');
+$call_xzgrep foo ../source/f0.txt.xz
+$call_xzgrep foo ../source/f1.txt.xz
+$call_xzgrep foo ../source/f2.txt.xz
+$call_xzgrep foo ../source/f3.txt.xz
+$call_xzgrep foo ../source/f4.txt.xz
+$call_xzgrep foo ../source/f5.txt.xz
+$call_xzgrep foo ../source/f6.txt.xz
 EOT
 &check_all_files();
 unlink(glob('*.txt'));
@@ -81,14 +87,20 @@ unlink(glob('*.txt'));
 # Same, but with -V and -p2
 run_ok($pxzgrep, qw(-V -p2 foo), glob('../source/*.txt.xz'));
 is(stdout, '', 'STDOUT empty with multiple files and -V -p2');
-eq_or_diff(stderr, <<"EOT", 'STDERR as expected with multiple files and -V and -p2');
-$call_xzgrep foo ../source/f0.txt.xz 
-$call_xzgrep foo ../source/f1.txt.xz 
-$call_xzgrep foo ../source/f2.txt.xz 
-$call_xzgrep foo ../source/f3.txt.xz 
-$call_xzgrep foo ../source/f4.txt.xz 
-$call_xzgrep foo ../source/f5.txt.xz 
-$call_xzgrep foo ../source/f6.txt.xz 
+# Cope with STDERR output change in xargs since 2019-11-25
+# (i.e. release ≤ 4.7.0), see https://savannah.gnu.org/bugs/?57291
+# (and not https://bugs.gnu.org/?57291 as referred to in the according
+# findutils changelog entry).
+$stderr = stderr;
+$stderr =~ s/ $//gm;
+eq_or_diff($stderr, <<"EOT", 'STDERR as expected with multiple files and -V and -p2');
+$call_xzgrep foo ../source/f0.txt.xz
+$call_xzgrep foo ../source/f1.txt.xz
+$call_xzgrep foo ../source/f2.txt.xz
+$call_xzgrep foo ../source/f3.txt.xz
+$call_xzgrep foo ../source/f4.txt.xz
+$call_xzgrep foo ../source/f5.txt.xz
+$call_xzgrep foo ../source/f6.txt.xz
 EOT
 &check_all_files();
 unlink(glob('*.txt'));
