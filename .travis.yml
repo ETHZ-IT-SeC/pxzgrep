@@ -1,9 +1,12 @@
 language: shell
 dist: focal
+# Implies "virt: lxd"
+arch: arm64
+
 addons:
   apt:
     sources:
-      - sourceline: deb http://archive.ubuntu.com/ubuntu devel main universe
+      - sourceline: deb http://ports.ubuntu.com/ubuntu-ports devel main universe
     update: true
     packages:
       - autopkgtest
