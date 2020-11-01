@@ -1,9 +1,12 @@
 language: shell
 dist: focal
+# Implies "virt: lxd"
+arch: arm64
+
 addons:
   apt:
     sources:
-      - sourceline: deb http://archive.ubuntu.com/ubuntu devel main universe
+      - sourceline: deb http://ports.ubuntu.com/ubuntu-ports devel main universe
     update: true
     packages:
       - autopkgtest
@@ -12,6 +15,8 @@ addons:
       - rpm
       - xz-utils
 before_script:
+  - apt-cache policy
+  - apt-cache policy ronn debhelper
   - sudo apt-get -y build-dep ./
   - mkdir -pv ~/rpmbuild/BUILD ~/rpmbuild/BUILDROOT ~/rpmbuild/RPMS ~/rpmbuild/SOURCES ~/rpmbuild/SPECS ~/rpmbuild/SRPMS
 
