@@ -125,7 +125,7 @@ Center](http://www.security.ethz.ch/).
 COPYRIGHT
 ---------
 
-© 2020 Axel Beckert <axel@ethz.ch>, ETH Zurich IT Security Center
+© 2020, 2021 Axel Beckert <axel@ethz.ch>, ETH Zurich IT Security Center
 
 
 LICENSE

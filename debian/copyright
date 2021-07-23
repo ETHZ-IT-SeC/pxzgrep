@@ -4,11 +4,11 @@ Upstream-Contact: Axel Beckert <axel@ethz.ch>
 Source: https://github.com/ETHZ-IT-SeC/pxzgrep
 
 Files: *
-Copyright: 2020 Axel Beckert <axel@ethz.ch>, ETH Zurich IT Security Center
+Copyright: 2020, 2021 Axel Beckert <axel@ethz.ch>, ETH Zurich IT Security Center
 License: GPL-3.0+
 
 Files: debian/*
-Copyright: 2020 Axel Beckert <abe@debian.org>
+Copyright: 2020, 2021 Axel Beckert <abe@debian.org>
 License: GPL-3.0+
 
 License: GPL-3.0+
