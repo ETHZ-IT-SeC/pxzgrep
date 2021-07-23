@@ -15,6 +15,8 @@ addons:
       - rpm
       - xz-utils
 before_script:
+  - apt-cache policy
+  - apt-cache policy ronn debhelper
   - sudo apt-get -y build-dep ./
   - mkdir -pv ~/rpmbuild/BUILD ~/rpmbuild/BUILDROOT ~/rpmbuild/RPMS ~/rpmbuild/SOURCES ~/rpmbuild/SPECS ~/rpmbuild/SRPMS
 
