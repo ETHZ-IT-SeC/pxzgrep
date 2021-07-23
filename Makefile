@@ -18,6 +18,7 @@ check:
 man: $(MANPAGE)
 $(MANPAGE): README.md Makefile
 	ronn --roff --manual="$(PROJECT) Manual" --organization="ETH Zurich IT-SeC" < $< > $@
+	sed -e /travis/d -i $@
 	gzip -9vnf $@
 
 install: all
