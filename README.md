@@ -111,6 +111,10 @@ RUN-TIME REQUIREMENTS
 * `xzgrep` (and hence also `grep` ;-) as usually shipped with `xz`
   itself (package `xz-utils` on Debian and Ubuntu).
 
+  _Please note that `zstd` support requires either `xzgrep` version
+  5.2.6 or higher, or Debian's `xz-utils` package version 5.2.5-1.0 or
+  higher._
+
 * Optionally `gzip`, `bzip2`, `lzop` and `zstd` to grep through
   compression formats supported by these tools.
 
