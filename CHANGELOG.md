@@ -19,8 +19,9 @@ project adheres to
 * Revamp Makefile, mostly building the distribution tarballs.
 * Add preliminary .spec file for building RPMs.
 * Add support for all non-xz file formats, xzgrep supports. Now also
-  supports the suffixes .gz, .bz2, .lzo, .zst and .Z. (tar-related
-  file suffixes like .tgz are implemented but not tested so far.)
+  supports the suffixes .gz, .bz2, .lzo, .zst, .lzma and .Z.
+  (tar-related file suffixes like .tgz are implemented but not tested
+  so far.)
 
 ## [1.0.0] - 2020-06-18
 

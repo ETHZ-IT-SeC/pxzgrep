@@ -28,8 +28,9 @@ Citing from the [xzgrep(1) man page](https://linux.die.net/man/1/xzgrep):
 > […] either uncompressed or compressed with xz(1), lzma(1), gzip(1),
 > bzip2(1), lzop(1) or zstd(1).
 
-These file formats, especially their file suffixes `.gz`, `.bz2`,
-`.lzo`, `.zstd`, `.z` and `.Z` are recognised by `pxzgrep` as well.
+These file formats, especially their file suffixes `.xz`, `.lzma`,
+`.gz`, `.bz2`, `.lzo`, `.zstd`, `.z` and `.Z` are recognised by
+`pxzgrep` as well.
 
 
 FILES

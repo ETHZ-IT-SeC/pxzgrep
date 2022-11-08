@@ -45,7 +45,7 @@ if [ "$1" = '--call-xzgrep' ]; then
 
     xzgrep $options "$pattern" "$file" > \
         ./$(basename "$file" | \
-            sed -e 's/\.\([gx]z\|bz2\|[tl]zo\|zst\|[zZ]\|t[abgx]z\|tbz2\|tzst\)$//')
+            sed -e 's/\.\([gx]z\|bz2\|[tl]zo\|zst\|[zZ]\|lzma\|t[abglx]z\|tbz2\|tzst\)$//')
     rc=$?
     case $rc in
         0) exit 1   ;;

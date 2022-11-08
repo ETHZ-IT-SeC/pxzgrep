@@ -60,6 +60,13 @@ is(stderr, '', 'STDERR empty with single file');
 file_contents_eq('f5.txt', "gnarz5\n");
 unlink('f5.txt');
 
+# Single file, lzma
+run_ok($pxzgrep, '66', '../source-non-xz/f6.txt.lzma');
+is(stdout, '', 'STDOUT empty with single file');
+is(stderr, '', 'STDERR empty with single file');
+file_contents_eq('f6.txt', "666\n");
+unlink('f6.txt');
+
 # Single file, no match (once with contents, once without)
 foreach my $file (qw(f1 f0)) {
     run($pxzgrep, 'gnarz', "../source-non-xz/$file.txt.gz");
@@ -107,7 +114,7 @@ $call_xzgrep foo ../source-non-xz/f2.txt.bz2
 $call_xzgrep foo ../source-non-xz/f3.txt.lzo
 $call_xzgrep foo ../source-non-xz/f4.txt.zst
 $call_xzgrep foo ../source-non-xz/f5.txt.Z
-$call_xzgrep foo ../source-non-xz/f6.txt.xz
+$call_xzgrep foo ../source-non-xz/f6.txt.lzma
 EOT
 &check_all_files();
 unlink(glob('*.txt'));
@@ -128,7 +135,7 @@ $call_xzgrep foo ../source-non-xz/f2.txt.bz2
 $call_xzgrep foo ../source-non-xz/f3.txt.lzo
 $call_xzgrep foo ../source-non-xz/f4.txt.zst
 $call_xzgrep foo ../source-non-xz/f5.txt.Z
-$call_xzgrep foo ../source-non-xz/f6.txt.xz
+$call_xzgrep foo ../source-non-xz/f6.txt.lzma
 EOT
 &check_all_files();
 unlink(glob('*.txt'));
