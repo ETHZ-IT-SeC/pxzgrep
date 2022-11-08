@@ -18,6 +18,10 @@ project adheres to
   exit code style: 0 = match found, 1 = no match found, 2 = error
 * Revamp Makefile, mostly building the distribution tarballs.
 * Add preliminary .spec file for building RPMs.
+* Add support for all non-xz file formats, xzgrep supports. Now also
+  supports the suffixes .gz, .bz2, .lzo, .zst and .Z. (tar-related
+  file suffixes like .tgz are not implemented so far. Please open an
+  issue in case you have a use case for that.)
 
 ## [1.0.0] - 2020-06-18
 

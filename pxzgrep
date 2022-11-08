@@ -43,7 +43,8 @@ if [ "$1" = '--call-xzgrep' ]; then
         exit 2;
     fi
 
-    xzgrep $options "$pattern" "$file" > ./$(basename "$file" .xz)
+    xzgrep $options "$pattern" "$file" > \
+        ./$(basename "$file" | sed -e 's/\.\([gx]z\|bz2\|lzo\|zst\|Z\)$//')
     rc=$?
     case $rc in
         0) exit 1   ;;

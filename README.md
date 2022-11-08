@@ -26,13 +26,16 @@ massive speed up if you run multiple `xzgrep` processes in parallel.
 Citing from the [xzgrep(1) man page](https://linux.die.net/man/1/xzgrep):
 
 > […] either uncompressed or compressed with xz(1), lzma(1), gzip(1),
-> bzip2(1), or lzop(1).
+> bzip2(1), lzop(1) or zstd(1).
+
+These file formats, especially their file suffixes `.gz`, `.bz2`,
+`.lzo`, `.zstd`, `.z` and `.Z` are recognised by `pxzgrep` as well.
 
 
 FILES
 -----
 
-Takes xz-compressed files as parameters.
+Takes compressed files as parameters.
 
 The grep result is saved per file in a file with the same basename
 (e.g. `abc.xz` becomes `abc`), but in the __current__ working directory.
@@ -107,6 +110,12 @@ RUN-TIME REQUIREMENTS
 * `xzgrep` (and hence also `grep` ;-) as usually shipped with `xz`
   itself (package `xz-utils` on Debian and Ubuntu).
 
+* Optionally `gzip`, `bzip2`, `lzop` and `zstd` to grep through
+  compression formats supported by these tools.
+
+Note: The LZMA format is handled by `xz` itself, and the "deflate" or
+"compress" format (suffixes `.z` and `.Z`) is handled by `gzip`.
+
 
 BUILD REQUIREMENTS
 ------------------
@@ -125,7 +134,7 @@ Center](http://www.security.ethz.ch/).
 COPYRIGHT
 ---------
 
-© 2020, 2021 Axel Beckert <axel@ethz.ch>, ETH Zurich IT Security Center
+© 2020-2022 Axel Beckert <axel@ethz.ch>, ETH Zurich IT Security Center
 
 
 LICENSE
