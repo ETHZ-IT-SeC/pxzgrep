@@ -20,12 +20,29 @@ Architecture: all
 Depends: ${misc:Depends},
          xz-utils
 Enhances: xz-utils
-Description: parallel xzgrep wrapper
+Description: parallel xzgrep wrapper, supports multiple compression formats
  If you need to grep through terabytes of compressed log files, this
  can take a lot of time if you do it serial - even on fast hardware.
  .
- But since such amounts of logs are usually not stored in a single file
- and most servers today have multiple cores anyway, you can get a
- massive speed up if you run multiple xzgrep processes in parallel.
+ But since such amounts of logs are usually not stored in a single
+ file and most servers today have multiple cores anyway, you can get a
+ massive speed up if you run multiple xzgrep processes in parallel,
+ especially if the logs are on fast media like NVMe.
  .
  pxzgrep automates this.
+ .
+ Despite its (and xzgrep's) name, it does not only support the xz
+ compression format but supports all compression formats xzgrep itself
+ supports. As of now these are:
+ .
+  * .xz and .lzma
+  * .gz (gzip)
+  * .bz2 (bzip2)
+  * .lzo (lzop)
+  * .zstd (zstd)
+  * .Z and .z (compress)
+ .
+ Due to its parallel approach it does NOT output the search result to
+ STDOUT, but instead saves for every path to a compressed file it got
+ on the commandline an uncompressed file of the same basename in the
+ current working directory, i.e. the directory it was called from.

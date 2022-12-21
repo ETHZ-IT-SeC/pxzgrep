@@ -3,6 +3,8 @@ pxzgrep (1.0.0+dev-1) UNRELEASED; urgency=medium
   * New upstream release.
     - Add test suite build-dependencies perl, libtest-command-simple-perl,
       libtest-file-contents-perl, libtest-differences-perl, and xz-utils.
+     - Supports all compression formats xzgrep supports. Update package
+       description accordingly.
   * Depend on xz-utils, it's just "Standard", not "Essential".
   * Add version constraint to ronn build-dependency: Need a version with
     kramdown as backend.
@@ -10,6 +12,7 @@ pxzgrep (1.0.0+dev-1) UNRELEASED; urgency=medium
   * Ignore some files which are in the git repository for convenience or
     CI reasons, but not in the generated upstream tar ball.
   * Declare compliance with Debian Policy 4.6.2.
+  * Extend package description.
 
  -- Axel Beckert <abe@debian.org>  Thu, 01 Oct 2020 20:26:28 +0200
 
