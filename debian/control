@@ -9,7 +9,7 @@ Build-Depends: debhelper-compat (= 13),
                perl,
                ronn (>= 0.9.0),
                xz-utils
-Standards-Version: 4.6.1
+Standards-Version: 4.6.2
 Homepage: https://github.com/ETHZ-IT-SeC/pxzgrep#readme
 Vcs-Browser: https://github.com/ETHZ-IT-SeC/pxzgrep
 Vcs-Git: https://github.com/ETHZ-IT-SeC/pxzgrep.git

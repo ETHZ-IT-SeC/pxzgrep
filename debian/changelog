@@ -9,7 +9,7 @@ pxzgrep (1.0.0+dev-1) UNRELEASED; urgency=medium
   * Support autopkgtest.
   * Ignore some files which are in the git repository for convenience or
     CI reasons, but not in the generated upstream tar ball.
-  * Declare compliance with Debian Policy 4.6.1.
+  * Declare compliance with Debian Policy 4.6.2.
 
  -- Axel Beckert <abe@debian.org>  Thu, 01 Oct 2020 20:26:28 +0200
 
