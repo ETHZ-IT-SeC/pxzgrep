@@ -4,13 +4,22 @@ pxzgrep TODO
 Planned Features
 ----------------
 
-* Behave more grep-like: In the end, output all hits to STDOUT by
+* **Append by default instead of overwriting.** Solves the issue of
+  searching files with the same name in different directories, e.g. in
+  directory structures with date based files names of the scheme
+  `YYYY-MM/HH:MM.log.xz`.
+
+* **Behave more grep-like**: In the end, output all hits to STDOUT by
   concatenating all output files in sorted order. Maybe use a
   temporary directory for those files and optionally delete them
-  again. (The old behaviour still needs to stay available.)
+  again. (The old behaviour still needs to stay available respectively
+  might be used in the background, e.g. by temporarily saving all the
+  results in a directory under `$TMPDIR`.)
   
-* Commandline option to select target directory instead of current
-  working directory, maybe `--target`
+* **Commandline option to select target directory instead of current
+  working directory**, maybe `--target` or maybe analoguos to `cp` and
+  `mv` rather `--target-directory=DIRECTORY` and `-t` (luckily so far
+  unused in `grep`).
   
 Ideas
 -----
