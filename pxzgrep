@@ -89,6 +89,12 @@ The grep result is saved per file in a file with the same basename
 
 Options:
 
+--append:
+    Do not overwrite but append to output files. Required if source
+    files in multiple directories might have the same file name
+    (e.g. purely date based file names or files from /var/log/ of
+    multiple hosts).
+
 -p: Takes a number as parameter and is passed to xargs as -P (number
     of parallel processes spawned). Defaults to amount of cores
     present in the running system.

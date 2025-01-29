@@ -7,7 +7,7 @@ SYNOPSIS
 --------
 
 ```
-pxzgrep [-p<n>] [-V] [<xzgrep options>] <pattern> <file1> <file2> [<more files>]
+pxzgrep [-p<n>] [-V] [--append] [<xzgrep options>] <pattern> <file1> <file2> [<more files>]
 ```
 
 
@@ -46,7 +46,7 @@ OPTIONS
 -------
 
 `--append`
-: Does not overwrite but append to output files. Required if source
+: Do not overwrite but append to output files. Required if source
   files in multiple directories might have the same file name
   (e.g. purely date based file names or files from `/var/log/` of
   multiple hosts).
