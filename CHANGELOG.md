@@ -22,6 +22,8 @@ project adheres to
   supports the suffixes .gz, .bz2, .lzo, .zst, .lzma and .Z.
   (tar-related file suffixes like .tgz are implemented but not tested
   so far.)
+* Add experimental support for appending to output files instead of
+  always overwriting them.
 
 ## [1.0.0] - 2020-06-18
 

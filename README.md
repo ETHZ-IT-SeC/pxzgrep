@@ -45,6 +45,17 @@ The grep result is saved per file in a file with the same basename
 OPTIONS
 -------
 
+`--append`
+: Does not overwrite but append to output files. Required if source
+  files in multiple directories might have the same file name
+  (e.g. purely date based file names or files from `/var/log/` of
+  multiple hosts).
+
+  _Note:_ This feature currently is considered to be experimental and
+  has a potential race condition which might lead to entries from
+  multiple source files being appended at the same time which might
+  result in entries not being separated by newlines.
+
 `-p`
 : Takes a number as parameter and is passed to xargs as `-P` (number
   of parallel processes spawned). Defaults to amount of cores

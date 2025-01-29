@@ -16,6 +16,7 @@
 # along with this program.  If not, see https://www.gnu.org/licenses/.
 
 options=""
+append=0
 
 # Switch between internal wrapper around xzgrep which handles output
 # files and xargs-suitable grep exit codes, and the actual main
@@ -27,7 +28,11 @@ if [ "$1" = '--call-xzgrep' ]; then
 
     while getopts :-: p; do
         if [ "$p" = "-" ]; then
-	    options="$options --$OPTARG"
+            if [ "$OPTARG" = "append" ]; then
+                append=1
+            else
+	        options="$options --$OPTARG"
+            fi
         elif [ "$p" = "?" ]; then
 	    options="$options -$OPTARG"
         fi
@@ -43,9 +48,15 @@ if [ "$1" = '--call-xzgrep' ]; then
         exit 2;
     fi
 
-    xzgrep $options "$pattern" "$file" > \
-        ./$(basename "$file" | \
-            sed -e 's/\.\([gx]z\|bz2\|[tl]zo\|zst\|[zZ]\|lzma\|t[abglx]z\|tbz2\|tzst\)$//')
+    if [ "$append" -eq 1 ]; then
+        xzgrep $options "$pattern" "$file" >> \
+            ./$(basename "$file" | \
+                sed -e 's/\.\([gx]z\|bz2\|[tl]zo\|zst\|[zZ]\|lzma\|t[abglx]z\|tbz2\|tzst\)$//')
+    else
+        xzgrep $options "$pattern" "$file" > \
+            ./$(basename "$file" | \
+                sed -e 's/\.\([gx]z\|bz2\|[tl]zo\|zst\|[zZ]\|lzma\|t[abglx]z\|tbz2\|tzst\)$//')
+    fi
     rc=$?
     case $rc in
         0) exit 1   ;;
